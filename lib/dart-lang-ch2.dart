@@ -4,6 +4,8 @@
 import 'dart:core';
 import 'dart:math';
 
+import 'package:sample_flutter_app/dart-oop.dart';
+
 int double(int n)
 {
   return n*2;
@@ -48,6 +50,11 @@ main()
 
   sort( FunctionRepository.extract("sampleDouble"), clients);
   clients.forEach((ele) {print(ele.name);});
+
+  //Can't access directly to the _releaseYear unless using the setter
+  Anime killLaKill = Anime("Kill La Kill", 2014, 9.5);
+  print(killLaKill.score);
+  print(killLaKill.releaseYear);
 
 }
 
