@@ -4,7 +4,7 @@
 import 'dart:core';
 import 'dart:math';
 
-import 'package:sample_flutter_app/dart-oop.dart';
+import 'dart-oop.dart';
 
 int double(int n)
 {
