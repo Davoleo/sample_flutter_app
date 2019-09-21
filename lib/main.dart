@@ -15,8 +15,23 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Text(this.text, textDirection: TextDirection.ltr,),
+    return Container(
+      color: Colors.grey,
+      padding: const EdgeInsets.all(26.0),
+      margin: EdgeInsets.only(top:30),
+      alignment: Alignment.topCenter,
+      child: Column(
+        //Flexbox Styled widget positioning
+        mainAxisAlignment: MainAxisAlignment.start,
+        mainAxisSize: MainAxisSize.max,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        textDirection: TextDirection.ltr,
+        children: <Widget>[
+          Container(color: Colors.red, child: Text(this.text, textDirection: TextDirection.ltr,),) ,
+          Container(color: Colors.blue, child: Text("Brief Text", textDirection: TextDirection.ltr,),),
+          Container(color: Colors.green, child: Text("Very very crazy long text", textDirection: TextDirection.ltr,),),
+        ],
+      ),
     );
   }
 
