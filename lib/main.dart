@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
@@ -18,12 +16,36 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: "SampleFlutterApp",
       theme: ThemeData(primarySwatch: Colors.green),
-      home: LoginPage(),
+      home: BoxDemo(),
     );
   }
 
 }
 
+class BoxDemo extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text("Layout Demo"),),
+      body: Center(
+        child: Container(
+         decoration: ShapeDecoration(
+            color: Colors.green,
+            shape:
+            Border.all(color: Colors.green[600], width: 2) +
+                Border.all(color: Colors.green[700], width: 2) +
+                Border.all(color: Colors.green[800], width: 2) +
+                Border.all(color: Colors.green[900], width: 2)
+         ),
+          padding: EdgeInsets.all(32),
+          child: Text("DEMO"),
+        ),
+      ),
+    );
+  }
+}
+
+//Sameple Login Page
 class LoginPage extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
@@ -64,6 +86,8 @@ class LoginPage extends StatelessWidget{
     );
   }
 }
+
+//Legacy Home
 
 //return Container(
 //color: Colors.grey,
