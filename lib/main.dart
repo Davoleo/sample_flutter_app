@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: "SampleFlutterApp",
       theme: ThemeData(primarySwatch: Colors.green),
-      home: BoxDemo(),
+      home: PersonalBudgetHomePage(),
     );
   }
 
@@ -83,6 +83,88 @@ class LoginPage extends StatelessWidget{
             )
           ],),
       ),
+    );
+  }
+}
+
+//Personal Budget Home Page
+class PersonalBudgetHomePage extends StatefulWidget {
+
+  PersonalBudgetHomePage({Key key}) : super(key: key);
+  // just like HTML element ids - something that is used to distinguish between different widgets
+
+  final String title = "Personal Budget";
+
+  @override
+  State createState() {
+    return _PersonalBudgetHomePageState();
+  }
+}
+
+class _PersonalBudgetHomePageState extends State<PersonalBudgetHomePage> {
+
+  int _selectedIndex = 0;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(widget.title),
+        actions: <Widget>[
+          IconButton(icon: Icon(Icons.settings), onPressed: () => {}),
+          IconButton(icon: Icon(Icons.refresh), onPressed: () => {})
+        ],
+      ),
+      body: Container(),
+      bottomNavigationBar: BottomNavigationBar(
+          type: BottomNavigationBarType.shifting,
+          selectedItemColor: Color(0xFF9A020C),
+          unselectedItemColor: Colors.grey,
+          currentIndex: _selectedIndex,
+          onTap: (_index) {
+            setState(() {
+              _selectedIndex = _index;
+            });
+          },
+          items: const <BottomNavigationBarItem> [
+            BottomNavigationBarItem(icon: Icon(Icons.home), title: Text('Home'),),
+            BottomNavigationBarItem(icon: Icon(Icons.list), title: Text('List'),),
+            BottomNavigationBarItem(icon: Icon(Icons.search), title: Text('Details'),),
+            BottomNavigationBarItem(icon: Icon(Icons.calendar_today), title: Text('Today'),),
+          ]
+      ),
+
+      floatingActionButton: FloatingActionButton(
+          onPressed: () {},
+          child: Icon(Icons.add),
+          tooltip: "Add Transaction",
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+
+      drawer: Drawer(
+        child: Container(
+          color: Color(0xFF107F93),
+          padding: EdgeInsets.fromLTRB(16, 32, 16, 16),
+          child: Text("Demo Drawer"),
+        ),
+      ),
+
+
+// Simple Bottom App Bar
+//      bottomNavigationBar: BottomAppBar(
+//        child: Container(
+//          color: Colors.green[300],
+//          height: 50,
+//          child: Row(
+//            mainAxisAlignment: MainAxisAlignment.spaceAround,
+//            children: <Widget>[
+//              FlatButton(child: Text("List"), onPressed: () => {},),
+//              FlatButton(child: Text("Details"), onPressed: () => {}),
+//              FlatButton(child: Text("Totals"), onPressed: () => {}),
+//            ],
+//          ),
+//        ),
+//      ),
     );
   }
 }
