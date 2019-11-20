@@ -16,12 +16,13 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: "SampleFlutterApp",
       theme: ThemeData(primarySwatch: Colors.green),
-      home: PersonalBudgetHomePage(),
+      home: TestHomePage(title: "Test App",),
     );
   }
 
 }
 
+//------------------------------------------------------------------------------------------------------------
 class BoxDemo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -45,7 +46,7 @@ class BoxDemo extends StatelessWidget {
   }
 }
 
-//Sameple Login Page
+//Sameple Login Page ---------------------------------------------------------------------------------------------
 class LoginPage extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
@@ -87,7 +88,7 @@ class LoginPage extends StatelessWidget{
   }
 }
 
-//Personal Budget Home Page
+//Personal Budget Home Page --------------------------------------------------------------------------------------
 class PersonalBudgetHomePage extends StatefulWidget {
 
   PersonalBudgetHomePage({Key key}) : super(key: key);
@@ -167,6 +168,116 @@ class _PersonalBudgetHomePageState extends State<PersonalBudgetHomePage> {
 //      ),
     );
   }
+}
+
+class TestHomePage extends StatefulWidget {
+
+  final String title;
+
+  TestHomePage({Key key, this.title}) : super(key: key);
+
+  @override
+  State createState() {
+    return _TestHomePageState();
+  }
+}
+
+class _TestHomePageState extends State<TestHomePage> {
+  User user = User();
+  TextEditingController userController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+
+  bool loginDisabled = true;
+
+  //Full TextField Use Example
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text(widget.title),),
+      body: Center(child: Column(
+          children: <Widget>[
+            Padding(padding: EdgeInsets.all(16), child:
+            TextField(
+              decoration: InputDecoration(
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(8))
+                ),
+                labelText: "Username",
+                icon: Icon(Icons.account_box),
+              ),
+              controller: userController,
+              //onChanged: this._onChanged,   (USing the controller to listen to changes)
+            ),),
+            Padding(padding: EdgeInsets.all(16), child:
+            TextField(
+              decoration: InputDecoration(
+                border: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(8))
+                ),
+                labelText: "Password",
+                icon: Icon(Icons.vpn_key),
+              ),
+              controller: passwordController,
+              //onChanged: this._onChanged,   (USing the controller to listen to changes)
+              obscureText: true,
+            ),),
+            RaisedButton(onPressed: loginDisabled ? null : this._loginPressed, child: Text("Log In"),)
+          ],
+      ),),
+    );
+  }
+
+  void _loginPressed() {
+    setState(() {
+      user.name = userController.text;
+      user.password = passwordController.text;
+    });
+  }
+
+  //To use with the onChanged Parameter
+  void _onChanged(String value) {
+    setState(() {
+      loginDisabled = userController.text.length == 0 || passwordController.text.length == 0;
+    });
+  }
+
+  //To use with the TextEditingController listeners
+  void onChanged() {
+    setState(() {
+      loginDisabled = userController.text.length == 0 || passwordController.text.length == 0;
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    userController.addListener(onChanged);
+    userController.addListener(removeSomeChars);
+    passwordController.addListener(onChanged);
+  }
+
+  void removeSomeChars() {
+    final text = userController.text.toLowerCase().replaceAll("@", "").replaceAll("#", "");
+
+    userController.value = userController.value.copyWith(
+      text: text,
+      //Creates a text selection that of length 0 at the end of the text field content (which basically means to place a cursor at the end of the textfield)
+      selection: TextSelection(baseOffset: text.length, extentOffset: text.length),
+      composing: TextRange.empty
+    );
+  }
+
+  @override
+  void dispose() {
+    userController.dispose();
+    passwordController.dispose();
+    super.dispose();
+  }
+}
+
+class User {
+  String name;
+  String password;
 }
 
 //Legacy Home
