@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:intl/intl.dart';
 
 void main() {
     runApp(MyApp());
@@ -187,11 +188,49 @@ class _TestHomePageState extends State<TestHomePage> {
   TextEditingController userController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
+  DateTime _selectedDate = DateTime.now();
+  TimeOfDay _selectedTime = TimeOfDay.now();
+
+  void setDate(BuildContext context) async {
+    //allows the user to choose a date and sets it to the DateTime
+    //Async Function - Returns a Future<>
+    var date = await showDatePicker(
+        context: context,
+        initialDate: _selectedDate,
+        firstDate: DateTime(2018),
+        lastDate: DateTime(2030)
+    );
+
+    //update the state
+    if (date != null) {
+      setState(() {
+        _selectedDate = date;
+      });
+    }
+
+    print("asbdadhajsdbaksdjasdjaksdhsahdkdhajkdh");
+  }
+
+  void setTime(context) async {
+    var time = await showTimePicker(
+        context: context,
+        initialTime: _selectedTime
+    );
+
+    if (time != null) {
+      setState(() {
+        _selectedTime = time;
+      });
+    }
+  }
+
   bool loginDisabled = true;
 
   //Full TextField Use Example
   @override
   Widget build(BuildContext context) {
+    final DateFormat dateFormat = DateFormat("dd/MM/yyyy");
+
     return Scaffold(
       appBar: AppBar(title: Text(widget.title),),
       body: Center(child: Column(
@@ -206,7 +245,7 @@ class _TestHomePageState extends State<TestHomePage> {
                 icon: Icon(Icons.account_box),
               ),
               controller: userController,
-              //onChanged: this._onChanged,   (USing the controller to listen to changes)
+              //onChanged: this._onChanged,   (Using the controller to listen to changes)
             ),),
             Padding(padding: EdgeInsets.all(16), child:
             TextField(
@@ -221,6 +260,22 @@ class _TestHomePageState extends State<TestHomePage> {
               //onChanged: this._onChanged,   (USing the controller to listen to changes)
               obscureText: true,
             ),),
+            Padding(
+              padding: EdgeInsets.all(16),
+              child: Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
+                Text(dateFormat.format(_selectedDate)),
+                IconButton(
+                  icon: Icon(Icons.date_range),
+                  onPressed: () => setDate(context),
+                ),
+                Padding(padding: EdgeInsets.only(left: 5),
+                  child: Row(children: <Widget>[
+                    Text(_selectedTime.format(context)),
+                    IconButton(icon: Icon(Icons.access_time), onPressed: () => setTime(context),)
+                  ],),
+                )
+              ],)
+            ),
             RaisedButton(onPressed: loginDisabled ? null : this._loginPressed, child: Text("Log In"),)
           ],
       ),),
