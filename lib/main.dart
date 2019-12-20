@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:intl/intl.dart';
+import 'package:sample_flutter_app/resolution_route.dart';
 
 void main() {
     runApp(MyApp());
@@ -287,6 +288,10 @@ class _TestHomePageState extends State<TestHomePage> {
       user.name = userController.text;
       user.password = passwordController.text;
     });
+    Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => ResolutionRoute())
+    );
   }
 
   //To use with the onChanged Parameter
