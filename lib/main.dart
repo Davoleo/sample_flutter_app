@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:intl/intl.dart';
+import 'package:sample_flutter_app/controls_route.dart';
 import 'package:sample_flutter_app/resolution_route.dart';
 
 void main() {
@@ -277,7 +278,8 @@ class _TestHomePageState extends State<TestHomePage> {
                 )
               ],)
             ),
-            RaisedButton(onPressed: loginDisabled ? null : this._loginPressed, child: Text("Log In"),)
+            RaisedButton(onPressed: loginDisabled ? null : this._loginPressed, child: Text("Log In"),),
+            RaisedButton(child: Text("Controls"), onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => ControlsRoute()));},)
           ],
       ),),
     );
