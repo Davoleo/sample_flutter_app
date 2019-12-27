@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 class ControlsRoute extends StatefulWidget {
@@ -19,6 +20,8 @@ enum Options {
 
 class _ControlsDemo extends State<ControlsRoute> {
   bool cbState = false;
+  bool switchState = false;
+  int sliderValue = 0;
 
   Options chosenOption = Options.op1;
 
@@ -58,6 +61,7 @@ class _ControlsDemo extends State<ControlsRoute> {
                   });})
             ],
           ),),
+          Text("Radio Buttons Demo"),
           Center(child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
@@ -66,6 +70,32 @@ class _ControlsDemo extends State<ControlsRoute> {
               Radio(value: Options.op3, groupValue: chosenOption, onChanged: onRadioClick),
             ],
           ),),
+          Text("Switch Demo"),
+          Switch(value: switchState,
+              //customize colors/images in the switch
+              activeColor: Colors.blue,
+              activeTrackColor: Colors.brown,
+              inactiveThumbColor: Colors.black,
+              inactiveTrackColor: Colors.grey,
+
+              //Widget Size
+              materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+              //Drag Behaviour Smoothness
+              dragStartBehavior: DragStartBehavior.start,
+
+              onChanged: (newVal) { setState(() {switchState = newVal;});}
+              ),
+          Text("Slider Demo"),
+          Slider(
+            value: sliderValue.toDouble(),
+            onChanged: (newVal) {setState(() {sliderValue = newVal.round();});},
+            min: 0,
+            max: 100,
+            //Slider Steps
+            divisions: 100,
+            label: "Drag Me! Slider Value is $sliderValue",
+          ),
+          Text("Il Valore è $sliderValue")
         ],
       ),
     );
