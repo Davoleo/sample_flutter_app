@@ -95,7 +95,23 @@ class _ControlsDemo extends State<ControlsRoute> {
             divisions: 100,
             label: "Drag Me! Slider Value is $sliderValue",
           ),
-          Text("Il Valore è $sliderValue")
+          Text("Il Valore è $sliderValue"),
+          RaisedButton(
+            elevation: 6,
+            highlightElevation: 1,
+            textColor: Colors.orange,
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(16))),
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                Icon(Icons.update, color: Colors.green,),
+                Padding(padding: EdgeInsets.only(left: 8, right: 8), child: Text("Update"),)
+              ],
+            ),
+            onPressed: () => {},
+          ),
+          //Specific Icon RaisedButton Constructor
+          RaisedButton.icon(onPressed: () => {}, icon: Icon(Icons.arrow_downward), label: Text("icon constructor"))
         ],
       ),
     );
