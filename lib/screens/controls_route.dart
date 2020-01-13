@@ -25,6 +25,20 @@ class _ControlsDemo extends State<ControlsRoute> {
 
   Options chosenOption = Options.op1;
 
+  final List<LanguageColor> langs = <LanguageColor> [
+    LanguageColor(1, "Java", Color(0xFFDC8F1F)),
+    LanguageColor(2, "Kotlin", Color(0xFFFFB240)),
+    LanguageColor(3, "Dart", Color(0xFF00E1D6)),
+    LanguageColor(4, "Typescript", Color(0xFF3691AB)),
+    LanguageColor(5, "C#", Color(0xFF1DA800)),
+    LanguageColor(6, "Objective C", Color(0xFF54B2FF)),
+    LanguageColor(6, "C++", Color(0xFFFF5E9C)),
+  ];
+
+  LanguageColor dropValue;
+
+  EnumPage popupValue;
+
   void onRadioClick(newValue) {
     setState(() {
       chosenOption = newValue;
@@ -33,6 +47,7 @@ class _ControlsDemo extends State<ControlsRoute> {
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       appBar: AppBar(title: Text(widget.title),),
       
@@ -65,7 +80,7 @@ class _ControlsDemo extends State<ControlsRoute> {
             ),),
             Text("Radio Buttons Demo"),
             Center(child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 Radio(value: Options.op1, groupValue: chosenOption, onChanged: onRadioClick),
                 Radio(value: Options.op2, groupValue: chosenOption, onChanged: onRadioClick),
@@ -128,7 +143,53 @@ class _ControlsDemo extends State<ControlsRoute> {
 
               padding: EdgeInsets.all(8),
             ),
-            IconButton(icon: Icon(Icons.videocam), onPressed: () => {},),
+              IconButton(icon: Icon(Icons.videocam), onPressed: () => {},),
+              DropdownButton<LanguageColor>(
+                disabledHint: Text("Disabled"),
+                hint: Text("Select a Language"),
+                icon: Icon(Icons.all_inclusive),
+                isExpanded: false,
+                
+                value: dropValue,
+                items: langs.map<DropdownMenuItem<LanguageColor>>(
+                    (LanguageColor color) {
+                      return DropdownMenuItem(
+                        child: Text(
+                          color.langName,
+                          style: TextStyle(color: color.color),),
+                        value: color,
+                      );
+                    }
+                ).toList(),
+                onChanged: (LanguageColor value) {setState(() {
+                  dropValue = value;
+                });},
+              ),
+              //Popup Menu
+              PopupMenuButton<EnumPage>(
+                child: Text("Navigate to..."),
+                itemBuilder: (BuildContext context) =>
+                <PopupMenuEntry<EnumPage>>[
+                  const PopupMenuItem<EnumPage>(
+                    value: EnumPage.home,
+                    child: Text("Home Page"),
+                  ),
+                  const PopupMenuDivider(),
+                  const PopupMenuItem<EnumPage>(
+                    value: EnumPage.page1,
+                    child: Text("First Page"),
+                  ),
+                  const PopupMenuItem<EnumPage>(
+                    value: EnumPage.page2,
+                    child: Text("Second Page"),
+                  )
+                ],
+                onSelected: (value) {
+                  setState(() {
+                    popupValue = value;
+                  });
+                  },
+              )
           ],)
         ],
       ),
@@ -141,4 +202,18 @@ class _ControlsDemo extends State<ControlsRoute> {
 
     );
   }
+}
+
+class LanguageColor {
+  int id;
+  String langName;
+  Color color;
+
+  LanguageColor(this.id, this.langName, this.color);
+}
+
+enum EnumPage {
+  home,
+  page1,
+  page2
 }
