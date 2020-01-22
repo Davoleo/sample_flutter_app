@@ -2,6 +2,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:sample_flutter_app/component/StarRating.dart';
 import 'package:sample_flutter_app/screens/resolution_route.dart';
 
 import 'controls_route.dart';
@@ -207,6 +208,7 @@ class _TestHomePageState extends State<TestHomePage> {
   }
 
   bool loginDisabled = true;
+  int stars = 0;
 
   //Full TextField Use Example
   @override
@@ -259,7 +261,12 @@ class _TestHomePageState extends State<TestHomePage> {
               ],)
           ),
           RaisedButton(onPressed: loginDisabled ? null : this._loginPressed, child: Text("Log In"),),
-          RaisedButton(child: Text("Controls"), onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => ControlsRoute()));},)
+          RaisedButton(child: Text("Controls"), onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => ControlsRoute()));},),
+          StarRating(value: stars, onPressed: (value) {
+            setState(() {
+              stars = value;
+            });
+          },)
         ],
       ),),
     );
