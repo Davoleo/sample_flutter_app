@@ -1,8 +1,8 @@
-//------------------------------------------------------------------------------------------------------------
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:sample_flutter_app/component/StarRating.dart';
+import 'package:sample_flutter_app/screens/orientation_managers.dart';
 import 'package:sample_flutter_app/screens/resolution_route.dart';
 
 import 'controls_route.dart';
@@ -266,7 +266,8 @@ class _TestHomePageState extends State<TestHomePage> {
             setState(() {
               stars = value;
             });
-          },)
+          },),
+          RaisedButton(child: Text("Orientation Managers"), onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => OrientationRoute()));})
         ],
       ),),
     );
