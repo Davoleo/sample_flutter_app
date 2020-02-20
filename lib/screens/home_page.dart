@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:sample_flutter_app/component/StarRating.dart';
+import 'package:sample_flutter_app/screens/keys.dart';
 import 'package:sample_flutter_app/screens/orientation_managers.dart';
 import 'package:sample_flutter_app/screens/resolution_route.dart';
 
@@ -154,6 +155,7 @@ class _PersonalBudgetHomePageState extends State<PersonalBudgetHomePage> {
   }
 }
 
+//TEST HOME PAGE ---------------------------------------------------------------------------------------------------
 class TestHomePage extends StatefulWidget {
 
   final String title;
@@ -267,7 +269,7 @@ class _TestHomePageState extends State<TestHomePage> {
               stars = value;
             });
           },),
-          RaisedButton(child: Text("Orientation Managers"), onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => OrientationRoute()));})
+          RaisedButton(child: Text("Orientation Managers"), onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => OrientationRoute()));}),
         ],
       ),),
     );
@@ -325,6 +327,59 @@ class _TestHomePageState extends State<TestHomePage> {
     super.dispose();
   }
 }
+
+class KeyTestPage extends StatefulWidget {
+
+  final String title = "Key Test";
+
+  @override
+  _KeyTestPageState createState() => _KeyTestPageState();
+}
+
+class _KeyTestPageState extends State<KeyTestPage> {
+
+  List<Widget> tiles;
+
+  void swapTiles() {
+    setState(() {
+      tiles.insert(1, tiles.removeAt(0));
+    });
+  }
+
+  //Keys allow flutter to sync trees of multiple instances of the same widget that would instead be ignored when syincing the element tree
+  //UniqueKey is automatically generated and takes care of everything
+  //Key allows you to use a string as a key
+  //ValueKey allows you to use a number as a key
+  //ValueKey<T> and ObjectKey allow you to use custom objects as keys
+  @override
+  void initState() {
+    super.initState();
+    tiles = [
+      StatefulColorWidget(Colors.redAccent, key: UniqueKey(),),
+      StatefulColorWidget(Colors.amber, key: UniqueKey())
+    ];
+  }
+
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(widget.title),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.swap_horiz),
+            onPressed: swapTiles,
+          )
+        ],
+      ),
+      body: Row(
+        children: this.tiles,
+      ),
+    );
+  }
+}
+
 
 class User {
   String name;
