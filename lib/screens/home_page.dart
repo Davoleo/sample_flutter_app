@@ -1,10 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:sample_flutter_app/component/StarRating.dart';
+import 'package:sample_flutter_app/components/StarRating.dart';
 import 'package:sample_flutter_app/screens/keys.dart';
 import 'package:sample_flutter_app/screens/orientation_managers.dart';
 import 'package:sample_flutter_app/screens/resolution_route.dart';
+import 'package:sample_flutter_app/utils/utils.dart';
 
 import 'controls_route.dart';
 
@@ -212,13 +213,16 @@ class _TestHomePageState extends State<TestHomePage> {
   bool loginDisabled = true;
   int stars = 0;
 
+  Size homeSize = Size(0, 0);
+  String status = "Before closure saves the context";
+
   //Full TextField Use Example
   @override
   Widget build(BuildContext context) {
     final DateFormat dateFormat = DateFormat("dd/MM/yyyy");
 
     return Scaffold(
-      appBar: AppBar(title: Text(widget.title),),
+      appBar: AppBar(title: Text(widget.title != null ? widget.title : "null"),),
       body: Center(child: Column(
         children: <Widget>[
           Padding(padding: EdgeInsets.all(16), child:
@@ -267,9 +271,14 @@ class _TestHomePageState extends State<TestHomePage> {
           StarRating(value: stars, onPressed: (value) {
             setState(() {
               stars = value;
+
+              //The Closure feature allows us to access to the context even when the building process has already finished, in the anonymous function
+              homeSize = context.size;
+              status = "context captured by closure";
             });
           },),
           RaisedButton(child: Text("Orientation Managers"), onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => OrientationRoute()));}),
+          Text(Utils.getInfo(context) + "\n" + Utils.getFormattedSize(homeSize) + "\n" + status),
         ],
       ),),
     );
