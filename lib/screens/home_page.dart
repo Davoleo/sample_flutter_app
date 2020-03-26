@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:sample_flutter_app/components/StarRating.dart';
+import 'package:sample_flutter_app/screens/forms_route.dart';
 import 'package:sample_flutter_app/screens/keys.dart';
 import 'package:sample_flutter_app/screens/orientation_managers.dart';
 import 'package:sample_flutter_app/screens/resolution_route.dart';
@@ -279,6 +280,7 @@ class _TestHomePageState extends State<TestHomePage> {
           },),
           RaisedButton(child: Text("Orientation Managers"), onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => OrientationRoute()));}),
           Text(Utils.getInfo(context) + "\n" + Utils.getFormattedSize(homeSize) + "\n" + status),
+          RaisedButton(child: Text("Forms"), onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => FormsRoute()));})
         ],
       ),),
     );
