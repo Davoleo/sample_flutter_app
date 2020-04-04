@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:sample_flutter_app/screens/todo_item_add.dart';
+import 'package:sample_flutter_app/screens/todo_item_details.dart';
+import 'package:sample_flutter_app/screens/todo_list.dart';
 
 import 'screens/home_page.dart';
 
@@ -17,10 +20,14 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: "SampleFlutterApp",
       theme: ThemeData(primarySwatch: Colors.green),
-      home: TestHomePage(title: "TestHomePage"),
+      //home: ToDoList(title: "TO DO List",),
+      routes: <String, WidgetBuilder> {
+        '/' : (BuildContext context) => ToDoList(title: "TODO Lis",),
+        '/tododetail' : (BuildContext context) => ToDoDetails(),
+        '/addtodo' : (BuildContext context) => AddToDoItem(),
+      },
     );
   }
-
 }
 
 //Legacy Home
