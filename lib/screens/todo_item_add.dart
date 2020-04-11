@@ -6,12 +6,11 @@ class AddToDoItem extends StatefulWidget {
   _AddToDoItemState createState() => _AddToDoItemState();
 }
 
-//FIXME Fix item Addition
 class _AddToDoItemState extends State<AddToDoItem> {
+  final ToDoItem item = ToDoItem(description: "", title: "");
+
   @override
   Widget build(BuildContext context) {
-    final ToDoItem item = ToDoItem(description: "", title: "");
-
     return SafeArea(
         child: Scaffold(
           appBar: AppBar(
@@ -20,7 +19,7 @@ class _AddToDoItemState extends State<AddToDoItem> {
             actions: <Widget>[
               IconButton(
                 icon: Icon(Icons.check),
-                onPressed: () => Navigator.pop(context, item),
+                onPressed: () => Navigator.pop(context, this.item),
               )
             ],
           ),
@@ -36,7 +35,6 @@ class _AddToDoItemState extends State<AddToDoItem> {
                 onChanged: (value) => item.description = value,
               ),
 
-              //FIXME - @Davoleo
               Checkbox(
                   value: item.done,
                   onChanged: (value) {

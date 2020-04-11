@@ -3,8 +3,6 @@ import 'package:sample_flutter_app/screens/todo_item_add.dart';
 import 'package:sample_flutter_app/screens/todo_item_details.dart';
 import 'package:sample_flutter_app/screens/todo_list.dart';
 
-import 'screens/home_page.dart';
-
 void main() {
     runApp(MyApp());
 }
@@ -22,7 +20,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(primarySwatch: Colors.green),
       //home: ToDoList(title: "TO DO List",),
       routes: <String, WidgetBuilder> {
-        '/' : (BuildContext context) => ToDoList(title: "TODO Lis",),
+        '/' : (BuildContext context) => ToDoList(title: "TODO List",),
         '/tododetail' : (BuildContext context) => ToDoDetails(),
         '/addtodo' : (BuildContext context) => AddToDoItem(),
       },

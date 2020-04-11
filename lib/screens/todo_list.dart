@@ -41,7 +41,7 @@ class _ToDoListState extends State<ToDoList> {
       ),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
-        onPressed: () => Navigator.pushNamed(context, "/addtodo"),
+        onPressed: () => this.getNewItem(context),
       ),
       body: ListView.builder(
         padding: EdgeInsets.all(8),
