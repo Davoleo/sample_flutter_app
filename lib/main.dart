@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:sample_flutter_app/screens/todo_item_add.dart';
-import 'package:sample_flutter_app/screens/todo_item_details.dart';
-import 'package:sample_flutter_app/screens/todo_list.dart';
+import 'package:sample_flutter_app/screens/error_screen.dart';
+import 'package:sample_flutter_app/screens/home_page.dart';
+import 'package:sample_flutter_app/utils/router.dart';
 
 void main() {
     runApp(MyApp());
@@ -18,12 +18,17 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: "SampleFlutterApp",
       theme: ThemeData(primarySwatch: Colors.green),
-      //home: ToDoList(title: "TO DO List",),
-      routes: <String, WidgetBuilder> {
-        '/' : (BuildContext context) => ToDoList(title: "TODO List",),
-        '/tododetail' : (BuildContext context) => ToDoDetails(),
-        '/addtodo' : (BuildContext context) => AddToDoItem(),
-      },
+      home: TestHomePage(),
+      //Third Navigation Method - Generator Function
+      onGenerateRoute: (settings) => Router.generateRoute(context, settings),
+      //Just Like a 404 Page
+      onUnknownRoute: (context) => MaterialPageRoute(builder: (context) => ErrorScreen()),
+//  Using named routes (like web back-end services)
+//      routes: <String, WidgetBuilder> {
+//        '/' : (BuildContext context) => ToDoList(title: "TO-DO List",),
+//        '/tododetail' : (BuildContext context) => ToDoDetails(),
+//        '/addtodo' : (BuildContext context) => AddToDoItem(),
+//      },
     );
   }
 }
