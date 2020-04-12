@@ -7,6 +7,7 @@ void main() {
     runApp(MyApp());
 }
 
+//TODO: Cleanup
 //Stateless widgets (For stuff that doesn't change)
 //Stateful widgets (For stuff that does change)
 class MyApp extends StatelessWidget {
