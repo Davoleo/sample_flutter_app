@@ -3,7 +3,7 @@ import 'package:sample_flutter_app/models/ToDoItem.dart';
 
 class ToDoList extends StatefulWidget {
   final String title;
-  ToDoList({Key key, this.title}) : super(key: key);
+  ToDoList({Key key, @required this.title}) : super(key: key);
 
   @override
   _ToDoListState createState() => _ToDoListState();

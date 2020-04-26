@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: "SampleFlutterApp",
       theme: ThemeData(primarySwatch: Colors.green),
-      home: TestHomePage(),
+      home: TestHomePage(title: "HomePage",),
       //Third Navigation Method - Generator Function
       onGenerateRoute: (settings) => Router.generateRoute(context, settings),
       //Just Like a 404 Page

@@ -3,10 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:sample_flutter_app/components/StarRating.dart';
 import 'package:sample_flutter_app/screens/forms_route.dart';
-import 'package:sample_flutter_app/screens/keys.dart';
+import 'package:sample_flutter_app/components/KeyTestComponents.dart';
 import 'package:sample_flutter_app/screens/navigation/navigation_route.dart';
 import 'package:sample_flutter_app/screens/orientation_managers.dart';
 import 'package:sample_flutter_app/screens/resolution_route.dart';
+import 'package:sample_flutter_app/screens/todo_list.dart';
 import 'package:sample_flutter_app/utils/utils.dart';
 
 import 'controls_route.dart';
@@ -225,66 +226,77 @@ class _TestHomePageState extends State<TestHomePage> {
 
     return Scaffold(
       appBar: AppBar(title: Text(widget.title != null ? widget.title : "null"),),
-      body: Center(child: Column(
+      body: ListView(
         children: <Widget>[
-          Padding(padding: EdgeInsets.all(16), child:
-          TextField(
-            decoration: InputDecoration(
-              border: OutlineInputBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(8))
-              ),
-              labelText: "Username",
-              icon: Icon(Icons.account_box),
-            ),
-            controller: userController,
-            //onChanged: this._onChanged,   (Using the controller to listen to changes)
-          ),),
-          Padding(padding: EdgeInsets.all(16), child:
-          TextField(
-            decoration: InputDecoration(
-              border: OutlineInputBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(8))
-              ),
-              labelText: "Password",
-              icon: Icon(Icons.vpn_key),
-            ),
-            controller: passwordController,
-            //onChanged: this._onChanged,   (USing the controller to listen to changes)
-            obscureText: true,
-          ),),
-          Padding(
-              padding: EdgeInsets.all(16),
-              child: Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
-                Text(dateFormat.format(_selectedDate)),
-                IconButton(
-                  icon: Icon(Icons.date_range),
-                  onPressed: () => setDate(context),
+          Center(
+            child: Column(
+            children: <Widget>[
+              Padding(padding: EdgeInsets.all(16), child:
+              TextField(
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(8))
+                  ),
+                  labelText: "Username",
+                  icon: Icon(Icons.account_box),
                 ),
-                Padding(padding: EdgeInsets.only(left: 5),
-                  child: Row(children: <Widget>[
-                    Text(_selectedTime.format(context)),
-                    IconButton(icon: Icon(Icons.access_time), onPressed: () => setTime(context),)
-                  ],),
-                )
-              ],)
-          ),
-          RaisedButton(onPressed: loginDisabled ? null : this._loginPressed, child: Text("Log In"),),
-          RaisedButton(child: Text("Controls"), onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => ControlsRoute()));},),
-          StarRating(value: stars, onPressed: (value) {
-            setState(() {
-              stars = value;
+                controller: userController,
+                //onChanged: this._onChanged,   (Using the controller to listen to changes)
+              ),),
+              Padding(padding: EdgeInsets.all(16), child:
+              TextField(
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(8))
+                  ),
+                  labelText: "Password",
+                  icon: Icon(Icons.vpn_key),
+                ),
+                controller: passwordController,
+                //onChanged: this._onChanged,   (USing the controller to listen to changes)
+                obscureText: true,
+              ),),
+              Padding(
+                  padding: EdgeInsets.all(16),
+                  child: Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
+                    Text(dateFormat.format(_selectedDate)),
+                    IconButton(
+                      icon: Icon(Icons.date_range),
+                      onPressed: () => setDate(context),
+                    ),
+                    Padding(padding: EdgeInsets.only(left: 5),
+                      child: Row(children: <Widget>[
+                        Text(_selectedTime.format(context)),
+                        IconButton(icon: Icon(Icons.access_time), onPressed: () => setTime(context),)
+                      ],),
+                    )
+                  ],)
+              ),
+              RaisedButton(onPressed: loginDisabled ? null : this._loginPressed, child: Text("Log In (Resolution Page)"),),
+              RaisedButton(child: Text("Controls"), onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => ControlsRoute()));},),
+              StarRating(value: stars, onPressed: (value) {
+                setState(() {
+                  stars = value;
 
-              //The Closure feature allows us to access to the context even when the building process has already finished, in the anonymous function
-              homeSize = context.size;
-              status = "context captured by closure";
-            });
-          },),
-          RaisedButton(child: Text("Orientation Managers"), onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => OrientationRoute()));}),
-          Text(Utils.getInfo(context) + "\n" + Utils.getFormattedSize(homeSize) + "\n" + status),
-          RaisedButton(child: Text("Forms"), onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => FormsRoute()));}),
-          RaisedButton(child: Text("Navigation"), onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => NavigationRoute()));})
+                  //The Closure feature allows us to access to the context even when the building process has already finished, in the anonymous function
+                  homeSize = context.size;
+                  status = "context captured by closure";
+                });
+              },),
+              RaisedButton(child: Text("Orientation Managers"), onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => OrientationRoute()));}),
+              Text(Utils.getInfo(context) + "\n" + Utils.getFormattedSize(homeSize) + "\n" + status),
+              RaisedButton(child: Text("Forms"), onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => FormsRoute()));}),
+              RaisedButton(child: Text("Navigation"), onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => NavigationRoute()));}),
+              RaisedButton(child: Text("Key Test"), onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => KeyTestPage()));}),
+              RaisedButton(child: Text("Personal Budget Page"), onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => PersonalBudgetHomePage()));}),
+              RaisedButton(child: Text("Test Login Page (Positioning)"), onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => LoginPage()));}),
+              RaisedButton(child: Text("Error Page"), onPressed: () {Navigator.pushNamed(context, "non_existing_route");}),
+              RaisedButton(child: Text("To-Do List"), onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => ToDoList(title: "TODO List",)));}),
+            ],
+            ),
+          ),
         ],
-      ),),
+      ),
     );
   }
 

@@ -31,21 +31,11 @@ class _NavigationRouteState extends State<NavigationRoute> {
           title: Text("Navigation Demo"),
         ),
 
-        floatingActionButton: Column(
-          verticalDirection: VerticalDirection.up,
-          children: <Widget>[
-            FloatingActionButton(
-              child: Icon(Icons.looks_one),
-              onPressed: () {
-                this.getScreenParams(context);
-              },
-            ),
-            FloatingActionButton(
-              child: Icon(Icons.looks_two),
-              onPressed: () {
-              },
-            ),
-          ],
+        floatingActionButton: FloatingActionButton(
+          child: Icon(Icons.looks_one),
+          onPressed: () {
+            this.getScreenParams(context);
+          },
         ),
 
         body: Container(
