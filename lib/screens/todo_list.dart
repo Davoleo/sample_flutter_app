@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:sample_flutter_app/models/ToDoItem.dart';
 
 class ToDoList extends StatefulWidget {
-  final String title;
-  ToDoList({Key key, @required this.title}) : super(key: key);
+  ToDoList({Key key}) : super(key: key);
 
   @override
   _ToDoListState createState() => _ToDoListState();
@@ -37,7 +36,7 @@ class _ToDoListState extends State<ToDoList> {
   Widget build(BuildContext context) {
     return SafeArea(child: Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        title: Text("To-Do List"),
       ),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),

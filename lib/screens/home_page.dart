@@ -291,7 +291,7 @@ class _TestHomePageState extends State<TestHomePage> {
               RaisedButton(child: Text("Personal Budget Page"), onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => PersonalBudgetHomePage()));}),
               RaisedButton(child: Text("Test Login Page (Positioning)"), onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => LoginPage()));}),
               RaisedButton(child: Text("Error Page"), onPressed: () {Navigator.pushNamed(context, "non_existing_route");}),
-              RaisedButton(child: Text("To-Do List"), onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => ToDoList(title: "TODO List",)));}),
+              RaisedButton(child: Text("To-Do List"), onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => ToDoList()));}),
             ],
             ),
           ),
