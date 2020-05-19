@@ -8,6 +8,7 @@ import 'package:sample_flutter_app/components/KeyTestComponents.dart';
 import 'package:sample_flutter_app/screens/navigation/navigation_route.dart';
 import 'package:sample_flutter_app/screens/orientation_managers.dart';
 import 'package:sample_flutter_app/screens/resolution_route.dart';
+import 'package:sample_flutter_app/screens/table_page.dart';
 import 'package:sample_flutter_app/screens/todo_list.dart';
 import 'package:sample_flutter_app/utils/utils.dart';
 
@@ -294,6 +295,7 @@ class _TestHomePageState extends State<TestHomePage> {
               RaisedButton(child: Text("Error Page"), onPressed: () {Navigator.pushNamed(context, "non_existing_route");}),
               RaisedButton(child: Text("To-Do List"), onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => ToDoList()));}),
               RaisedButton(child: Text("File Storage"), onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => FileStorageScreen()));}),
+              RaisedButton(child: Text("Table Layout"), onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => TablePage()));}),
             ],
             ),
           ),
