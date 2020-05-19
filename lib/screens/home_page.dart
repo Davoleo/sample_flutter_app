@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:sample_flutter_app/components/StarRating.dart';
+import 'package:sample_flutter_app/screens/file_storage_route.dart';
 import 'package:sample_flutter_app/screens/forms_route.dart';
 import 'package:sample_flutter_app/components/KeyTestComponents.dart';
 import 'package:sample_flutter_app/screens/navigation/navigation_route.dart';
@@ -292,6 +293,7 @@ class _TestHomePageState extends State<TestHomePage> {
               RaisedButton(child: Text("Test Login Page (Positioning)"), onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => LoginPage()));}),
               RaisedButton(child: Text("Error Page"), onPressed: () {Navigator.pushNamed(context, "non_existing_route");}),
               RaisedButton(child: Text("To-Do List"), onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => ToDoList()));}),
+              RaisedButton(child: Text("File Storage"), onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => FileStorageScreen()));}),
             ],
             ),
           ),

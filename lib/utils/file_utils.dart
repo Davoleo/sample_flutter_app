@@ -18,7 +18,7 @@ abstract class FileUtils {
 
   static Future<bool> save(String data) async {
     File file = await _localFile;
-    file.writeAsString(data, mode: FileMode.append);
+    file.writeAsString(data, mode: FileMode.write);
     return true;
   }
 
