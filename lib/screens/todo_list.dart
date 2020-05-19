@@ -67,7 +67,7 @@ class _ToDoListState extends State<ToDoList> {
                         ? Icons.check_box
                         : Icons.check_box_outline_blank),
               onTap: () {
-                Navigator.pushNamed(context, "/tododetail", arguments: items[index]);
+                Navigator.pushNamed<dynamic>(context, "/tododetail", arguments: items[index]);
 //                Navigator.push(context, MaterialPageRoute<void>(
 //                    builder: (context) {
 //                      return ToDoDetails(item: items[index]);
