@@ -9,6 +9,7 @@ import 'package:sample_flutter_app/screens/legacy_home.dart';
 import 'package:sample_flutter_app/screens/navigation/navigation_route.dart';
 import 'package:sample_flutter_app/screens/orientation_managers.dart';
 import 'package:sample_flutter_app/screens/resolution_route.dart';
+import 'package:sample_flutter_app/screens/stack_page.dart';
 import 'package:sample_flutter_app/screens/table_page.dart';
 import 'package:sample_flutter_app/screens/todo_list.dart';
 import 'package:sample_flutter_app/utils/utils.dart';
@@ -298,6 +299,7 @@ class _TestHomePageState extends State<TestHomePage> {
               RaisedButton(child: Text("File Storage"), onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => FileStorageScreen()));}),
               RaisedButton(child: Text("Table Layout"), onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => TablePage()));}),
               RaisedButton(child: Text("Legacy Home"), onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => LegacyHome()));}),
+              RaisedButton(child: Text("Stack Layout"), onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => StackPage()));}),
             ],
             ),
           ),
