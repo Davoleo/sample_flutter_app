@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:sample_flutter_app/models/ToDoItem.dart';
 import 'package:sample_flutter_app/repository/DBProvider.dart';
 import 'package:sample_flutter_app/repository/DataRepository.dart';
@@ -29,7 +28,7 @@ class SQLRepository extends DataRepository {
 
   @override
   Future<void> closeRepo() {
-    // TODO: implement closeRepo
+    _dbProvider.close();
     return null;
   }
 
