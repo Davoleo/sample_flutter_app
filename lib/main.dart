@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(primarySwatch: Colors.green),
       home: TestHomePage(title: "HomePage",),
       //Third Navigation Method - Generator Function
-      onGenerateRoute: (settings) => Router.generateRoute(context, settings),
+      onGenerateRoute: (settings) => Router.generateRoute(settings),
       //Just Like a 404 Page
       onUnknownRoute: (context) => MaterialPageRoute(builder: (context) => ErrorScreen()),
 //  Using named routes (like web back-end services)

@@ -14,8 +14,10 @@ class _AddToDoItemState extends State<AddToDoItem> {
     return SafeArea(
         child: Scaffold(
           appBar: AppBar(
-            title: Text("New TO-DO"),
+            title: Text("New TO-DO Item"),
+
             leading: IconButton(icon: Icon(Icons.arrow_back), onPressed: () => Navigator.pop(context)),
+
             actions: <Widget>[
               IconButton(
                 icon: Icon(Icons.check),
@@ -23,6 +25,7 @@ class _AddToDoItemState extends State<AddToDoItem> {
               )
             ],
           ),
+
           body: Padding(
             padding: EdgeInsets.all(8),
             child: Column(children: <Widget>[
@@ -36,10 +39,10 @@ class _AddToDoItemState extends State<AddToDoItem> {
               ),
 
               Checkbox(
-                  value: item.done,
+                  value: item.done != 0,
                   onChanged: (value) {
                     setState(() {
-                      item.done = !item.done;
+                      item.done = item.done != 0 ? 0 : 1;
                     });
                   }
               )

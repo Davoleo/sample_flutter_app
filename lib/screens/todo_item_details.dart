@@ -24,7 +24,7 @@ class ToDoDetails extends StatelessWidget {
             Text(item.description),
             Divider(),
             Text("Done"),
-            Icon(item.done ? Icons.check_box : Icons.check_box_outline_blank)
+            Icon(item.done != 0 ? Icons.check_box : Icons.check_box_outline_blank)
           ],),
         ),
       ),

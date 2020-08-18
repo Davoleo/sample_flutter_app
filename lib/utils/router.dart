@@ -6,7 +6,7 @@ import 'package:sample_flutter_app/screens/todo_item_details.dart';
 
 abstract class Router {
 
-  static Route<dynamic> generateRoute(BuildContext context, RouteSettings settings) {
+  static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
       case "/":
         return MaterialPageRoute(

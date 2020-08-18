@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sample_flutter_app/models/ToDoItem.dart';
+import 'package:sample_flutter_app/repository/DataRepository.dart';
+import 'package:sample_flutter_app/repository/SQLRepository.dart';
 
 class ToDoList extends StatefulWidget {
   ToDoList({Key key}) : super(key: key);
@@ -9,27 +11,40 @@ class ToDoList extends StatefulWidget {
 }
 
 class _ToDoListState extends State<ToDoList> {
-  List<ToDoItem> items;
+
+  DataRepository _repository;
 
   @override
   void initState() {
     super.initState();
-    items = [
-      ToDoItem(title: "Title1", description: "Desc1"),
-      ToDoItem(title: "Title2", description: "Desc2"),
-      ToDoItem(title: "Title3", description: "Desc3"),
-      ToDoItem(title: "Title4", description: "Desc4"),
-    ];
+    _repository = SQLRepository();
+  }
+
+  @override
+  void dispose() async {
+    await _repository.closeRepo();
+    super.dispose();
   }
 
   void getNewItem(BuildContext context) async {
     ToDoItem newItem = await Navigator.pushNamed<dynamic>(context, '/addtodo');
+
     //null will be returned when the user exits using the back button on android
     if (newItem != null) {
-      setState(() {
-        items.add(newItem);
-      });
+      await _repository.add(newItem);
+      setState(() {});
     }
+  }
+
+  void switchAndUpdate(ToDoItem item) async {
+    item.done = item.done != 0 ? 0 : 1;
+    await _repository.put(item.id, item);
+    setState(() {});
+  }
+
+  void remove(ToDoItem item) async {
+    await _repository.remove(item.id);
+    setState(() {});
   }
 
   @override
@@ -42,47 +57,47 @@ class _ToDoListState extends State<ToDoList> {
         child: Icon(Icons.add),
         onPressed: () => this.getNewItem(context),
       ),
-      body: ListView.builder(
-        padding: EdgeInsets.all(8),
-        itemCount: items.length,
-        itemBuilder: (BuildContext context, int index) {
-          return Dismissible(
-            key: UniqueKey(),
-            background: DecoratedBox(
-              decoration: BoxDecoration(color: Colors.red),
-              child: Align(
-                alignment: Alignment(-0.9, 0),
-                child: Icon(Icons.delete, color: Colors.white,),
-              ),
-            ),
-            direction: DismissDirection.startToEnd,
-            onDismissed: (direction) {
-              setState(() {
-                items.removeAt(index);
-              });
+      body: FutureBuilder<List<ToDoItem>> (
+
+        future: _repository.getAll(),
+
+        builder: (BuildContext context, AsyncSnapshot<List<ToDoItem>> snapshot) {
+          return ListView.builder(
+            padding: EdgeInsets.all(8),
+            itemCount: snapshot.data == null ? 0 : snapshot.data.length,
+            itemBuilder: (BuildContext context, int index) {
+              return Dismissible(
+                key: Key(index.toString()),
+                background: DecoratedBox(
+                  decoration: BoxDecoration(color: Colors.red),
+                  child: Align(
+                    alignment: Alignment(-0.9, 0),
+                    child: Icon(Icons.delete, color: Colors.white,),
+                  ),
+                ),
+                direction: DismissDirection.startToEnd,
+                onDismissed: (direction) {
+                  ToDoItem item = snapshot.data[index];
+                  snapshot.data.removeAt(index);
+                  remove(item);
+                },
+                child: ListTile(
+                  title: Text(snapshot.data[index].title),
+                  trailing: Icon(snapshot.data[index].done != 0
+                      ? Icons.check_box
+                      : Icons.check_box_outline_blank),
+                  onTap: () {
+                    Navigator.pushNamed<dynamic>(context, "/tododetail", arguments: snapshot.data[index]);
+                  },
+                  onLongPress: () {
+                    switchAndUpdate(snapshot.data[index]);
+                  },
+                ),
+              );
             },
-            child: ListTile(
-              title: Text(items[index].title),
-              trailing: Icon(items[index].done
-                        ? Icons.check_box
-                        : Icons.check_box_outline_blank),
-              onTap: () {
-                Navigator.pushNamed<dynamic>(context, "/tododetail", arguments: items[index]);
-//                Navigator.push(context, MaterialPageRoute<void>(
-//                    builder: (context) {
-//                      return ToDoDetails(item: items[index]);
-//                    })
-//                );
-              },
-              onLongPress: () {
-                setState(() {
-                  items[index].done = !items[index].done;
-                });
-              },
-            ),
           );
         },
-      ),
+      )
     ));
   }
 }
