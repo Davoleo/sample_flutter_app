@@ -16,9 +16,10 @@ f()
 
 main()
 {
-  //primitive types are passed as values in functions
+  //primitive types are passed by value in functions
   int num = 100;
-  print(double(num));
+  double(num);
+  print(num); //100
 
   var fun = f();
   print(fun == null);
@@ -26,15 +27,14 @@ main()
 
   generateButton("button_confirm", 32);
   //parameters can be assigned specifically addressing them by their name (only if they are enclosed in {})
-  generateButtonNominale(id: "namedParamButton", colorCode: 123);
+  generateButtonNamed(id: "namedParamButton", colorCode: 123);
 
   var codes = ["ABC123", "XVW667", "GTU200", "MVQ003"];
   String prefixes=""; //<-- All the letters
-
   codes.forEach((String el) {prefixes += el.substring(0, 3);});
   print(prefixes);
 
-  //Arrow functions | Functions assigned to a variable (lists too)
+  //Arrow functions | Anonymous Functions [LAMBDA]
   var powerFunctions = [(n) => n*n, (n) => n*n*n, (base, espo) => pow(base, espo)];
   print(powerFunctions[0](2));
   print(powerFunctions[1](2));
@@ -62,17 +62,18 @@ main()
 //optional parameters are defined by enclosing them into [] - you can assign Default value to optional parameters
 String generateButton(String id, [int colorCode, int width=100])
 {
-  String html = "<button>";
+  String html = "<button id='$id' style='color: $colorCode; width: $width' ></button>";
   return html;
 }
 
-//the  @required annotation makes a parameter when using {} necessary
-String generateButtonNominale({ /*@required*/ String id, int colorCode})
+//required: makes a named parameter "necessary"
+String generateButtonNamed({ String id, int colorCode})
 {
-  String html = "<button>";
+  String html = "<button id='$id' style='color: $colorCode'></button>";
   return html;
 }
 
+//Data Structure
 class Client
 {
   String name="";
@@ -84,7 +85,6 @@ class Client
     this.name = name;
     this.sampleDouble = sampleDouble;
     this.sampleInt = sampleInt;
-
   }
 }
 
