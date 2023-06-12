@@ -13,20 +13,16 @@ class Anime
 
   Anime(this.name, this._releaseYear, this.score);
 
-  Anime.expanded(name, releaseYear, score)
-  {
-    this.name = name;
-    this.releaseYear = releaseYear;
-    this.score = score;
-  }
+  Anime.expanded(name, releaseYear, score) :
+        this.name = name,
+        this._releaseYear = releaseYear,
+        this.score = score;
 
   //Specific Constructors (special overload)
-  Anime.fromJson(var jsonObj)
-  {
-    this.name = jsonObj["name"];
-    this.releaseYear = jsonObj["releaseYear"];
-    this.score = jsonObj["score"];
-  }
+  Anime.fromJson(var jsonObj) :
+        this.name = jsonObj["name"],
+        this._releaseYear = jsonObj["releaseYear"],
+        this.score = jsonObj["score"];
 
   //This calls the expanded constructor
   Anime.fromJsonRedirect(var jsonObj) :
@@ -51,7 +47,8 @@ class Person {
   }
 }
 
-class Programmer extends Person {
+// Mixins can be added to classes to add functionality [traits]
+class Programmer extends Person with CoffeeDrinker {
 
   String language;
 
@@ -60,6 +57,16 @@ class Programmer extends Person {
   @override
   void speak() {
     print("Hello my name is $name and I code in $language");
+  }
+}
+
+//Mixins are like traits in other oop languages, allow to add new features to generic objects
+mixin CoffeeDrinker {
+  int drunkCoffees = 0;
+  
+  void drinkCoffee() {
+    drunkCoffees++;
+    print("Drinking coffee n°$drunkCoffees...");
   }
 }
 
@@ -74,6 +81,29 @@ class Bird implements Animal {
   void makeNoise() {
     print("Tweet Tweet");
   }
+}
+
+enum PlanetType {
+  terrestrial,
+  gaseous,
+  ice
+}
+
+enum Planet {
+  mercury(type: PlanetType.terrestrial, moons: 0, hasRings: false),
+  venus(type: PlanetType.terrestrial, moons: 0, hasRings: false),
+  //...
+  uranus(type: PlanetType.ice, moons: 27, hasRings: true),
+  neptune(type: PlanetType.ice, moons: 14, hasRings: true);
+
+  final PlanetType type;
+  final int moons;
+  final bool hasRings;
+
+  const Planet({required this.type, required this.moons, required this.hasRings});
+
+  bool get isGiant => this.type == PlanetType.gaseous || this.type == PlanetType.ice;
+
 }
 
 main() {

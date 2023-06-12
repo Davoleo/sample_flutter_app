@@ -60,14 +60,14 @@ main()
 
 //NO FUNCTION OVERLOAD
 //optional parameters are defined by enclosing them into [] - you can assign Default value to optional parameters
-String generateButton(String id, [int colorCode, int width=100])
+String generateButton(String id, [int colorCode = 0, int width=100])
 {
   String html = "<button id='$id' style='color: $colorCode; width: $width' ></button>";
   return html;
 }
 
 //required: makes a named parameter "necessary"
-String generateButtonNamed({ String id, int colorCode})
+String generateButtonNamed({ required String id, int colorCode = 0})
 {
   String html = "<button id='$id' style='color: $colorCode'></button>";
   return html;
@@ -111,6 +111,6 @@ class FunctionRepository {
 
   static Function extract(String criteria)
   {
-    return functions[criteria];
+    return functions[criteria]!;
   }
 }

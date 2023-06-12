@@ -1,0 +1,4 @@
+name: dart_test
+
+environment:
+  sdk: ^3.0.0
