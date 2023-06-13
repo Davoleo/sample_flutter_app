@@ -6,10 +6,8 @@ import 'dart:math';
 
 import 'dart-oop.dart';
 
-int double(int n)
-{
-  return n*2;
-}
+//shorthand function [for one liners]
+int double(int n) => n*2;
 
 f()
 {}
@@ -56,6 +54,30 @@ main()
   print(killLaKill.score);
   print(killLaKill.releaseYear);
 
+}
+
+// Generators
+// Lazily produce sequence of values:
+//- Synchronous: Iterable
+//- Asynchronous: Stream
+Iterable<int> naturalsTo(int n) sync* {
+  int k = 0;
+  while (k < n)
+    yield k++;
+}
+
+Stream<int> asyncNaturalsTo(int n) async* {
+  int k = 0;
+  while (k < n)
+    yield k++;
+}
+
+//yield* -> Better performance in recursive generators
+Iterable<int> naturalsDownFrom(int n) sync* {
+  if (n > 0) {
+    yield n;
+    yield* naturalsDownFrom(n);
+  }
 }
 
 //NO FUNCTION OVERLOAD

@@ -123,6 +123,35 @@ main() {
   Consumer<String> stringgrabber = (str) => print(str);
   listOfStrings.forEach(stringgrabber);
 
+  var numList = [1,2,3];
+  //list pattern destructures three elements from numList;
+  var [m1, m2, m3] = numList;
+
+  var (a, b) = ('left', 'right');
+  (b, a) = (a, b); // Swap.
+  print('$a $b'); // Prints "right left".
+
+  String color = "banana";
+  var isPrimary = switch(color) {
+    'red' || 'yellow' || 'blue' => true,
+    _ => false
+  };
+
+}
+
+//Relational Patterns
+String asciiCharType(int char) {
+  const space = 32;
+  const zero = 48;
+  const nine = 57;
+
+  return switch (char) {
+    < space => 'control',
+    == space => 'space',
+    > space && < zero => 'punctuation',
+    >= zero && <= nine => 'digit',
+    _ => ''
+  };
 }
 
 //=== Typedefs ===
