@@ -11,36 +11,69 @@ class Anime
   int _releaseYear;
   double score;
 
+  //Direct initialization [implicit assignment of internal fields]
   Anime(this.name, this._releaseYear, this.score);
 
+  //Initializer list [usually used when you need to do extra stuff in intialization or initialization is not banal, see below]
   Anime.expanded(name, releaseYear, score) :
         this.name = name,
         this._releaseYear = releaseYear,
         this.score = score;
 
-  //Specific Constructors (special overload)
+  //named constructor, initializer list
   Anime.fromJson(var jsonObj) :
         this.name = jsonObj["name"],
         this._releaseYear = jsonObj["releaseYear"],
         this.score = jsonObj["score"];
 
   //This calls the expanded constructor
+  //Sole purpose of this constructor is to delegate the work to another one kekw
   Anime.fromJsonRedirect(var jsonObj) :
       this.expanded(jsonObj["name"], jsonObj["releaseYear"], jsonObj["score"]);
 
   //The only way you can access to private veriables from an external file
   int get releaseYear => _releaseYear;
 
+  //Makes the object callable, can be called like a function
+  //in this case it just returns the object itself
+  Anime call() {
+    return this;
+  }
+
+  @override
+  bool operator ==(Object other) =>
+      other is Anime
+          && name == other.name
+          && _releaseYear == other._releaseYear
+          && score == other.score;
+
   set releaseYear(int value) {
     _releaseYear = value;
   }
 
+  //you can override this method to intercept calls to non existent member methods
+  //Avoiding the NoSuchMethodError that would be thrown otherwise
+  @override
+  dynamic noSuchMethod(Invocation invocation) {
+    print("You tried to use a non-existent member: ${invocation.memberName}");
+  }
 }
 
 class Person {
-  String name;
+  final String name;
 
-  Person(this.name);
+  static final Map<String, Person> _cache = <String, Person>{};
+
+  //Factory constructors can return from cache instead of creating a new object or also work on creating subclasses instances.
+  factory Person(String name) {
+    return _cache.putIfAbsent(name, () => Person._internal(name));
+  }
+
+  factory Person.fromJson(Map<String, Object> json) {
+    return Person(json['name'].toString());
+  }
+
+  Person._internal(this.name);
 
   void speak() {
     print("Hello, my name's $name");
@@ -52,7 +85,7 @@ class Programmer extends Person with CoffeeDrinker {
 
   String language;
 
-  Programmer(String name, this.language) : super(name);
+  Programmer(String name, this.language) : super._internal(name);
   
   @override
   void speak() {
@@ -100,19 +133,36 @@ enum Planet {
   final int moons;
   final bool hasRings;
 
+  //Constant contructors create objects that never change, these objects can be used as compile-time constants
   const Planet({required this.type, required this.moons, required this.hasRings});
 
   bool get isGiant => this.type == PlanetType.gaseous || this.type == PlanetType.ice;
 
 }
 
+//Extension methods
+//Way to implant methods to external types [whether it's external library or primitive types]
+//!You need to be careful! you can do some cool stuff but also very weird stuff that ruins APIs
+extension StringExt on String {
+  int parseInt() {
+    return int.parse(this);
+  }
+  double parseDouble() {
+    return double.parse(this);
+  }
+}
+
 main() {
   Anime parasyte = Anime("Parasyte", 2014, 8.0);
   print(parasyte._releaseYear);
+  var alias = parasyte();
+  print(alias.name);
 
   Person uwu = Person("Matteo");
   Programmer davoleo = Programmer("Davoleo", "Java");
   uwu.speak();
   davoleo.speak();
+
+  int answer = '42'.parseInt();
 }
 
