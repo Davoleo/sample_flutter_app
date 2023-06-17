@@ -4,9 +4,7 @@ class Player extends ChangeNotifier {
   String _name;
   int _score;
 
-  Player(this._name, {int score = 0}) {
-    _score = score;
-  }
+  Player(this._name, {int score = 0}): _score = score;
 
   String get name => _name;
 

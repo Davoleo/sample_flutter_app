@@ -27,10 +27,10 @@ class BoxDemo extends StatelessWidget {
           decoration: ShapeDecoration(
               color: Colors.green,
               shape:
-              Border.all(color: Colors.green[600], width: 2) +
-                  Border.all(color: Colors.green[700], width: 2) +
-                  Border.all(color: Colors.green[800], width: 2) +
-                  Border.all(color: Colors.green[900], width: 2)
+              Border.all(color: Colors.green[600]!, width: 2) +
+                  Border.all(color: Colors.green[700]!, width: 2) +
+                  Border.all(color: Colors.green[800]!, width: 2) +
+                  Border.all(color: Colors.green[900]!, width: 2)
           ),
           padding: EdgeInsets.all(32),
           child: Text("DEMO"),
@@ -74,7 +74,7 @@ class LoginPage extends StatelessWidget{
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
-              children: <Widget>[RaisedButton(child: Text("Login"), onPressed: () => {},)],
+              children: <Widget>[ElevatedButton(child: Text("Login"), onPressed: () => {},)],
             )
           ],),
       ),
@@ -85,7 +85,7 @@ class LoginPage extends StatelessWidget{
 //Personal Budget Home Page --------------------------------------------------------------------------------------
 class PersonalBudgetHomePage extends StatefulWidget {
 
-  PersonalBudgetHomePage({Key key}) : super(key: key);
+  PersonalBudgetHomePage({Key? key}) : super(key: key);
   // just like HTML element ids - something that is used to distinguish between different widgets
 
   final String title = "Personal Budget";
@@ -122,10 +122,10 @@ class _PersonalBudgetHomePageState extends State<PersonalBudgetHomePage> {
             });
           },
           items: const <BottomNavigationBarItem> [
-            BottomNavigationBarItem(icon: Icon(Icons.home), title: Text('Home'),),
-            BottomNavigationBarItem(icon: Icon(Icons.list), title: Text('List'),),
-            BottomNavigationBarItem(icon: Icon(Icons.search), title: Text('Details'),),
-            BottomNavigationBarItem(icon: Icon(Icons.calendar_today), title: Text('Today'),),
+            BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home',),
+            BottomNavigationBarItem(icon: Icon(Icons.list), label: 'List',),
+            BottomNavigationBarItem(icon: Icon(Icons.search), label: 'Details',),
+            BottomNavigationBarItem(icon: Icon(Icons.calendar_today), label: 'Today',),
           ]
       ),
 
@@ -169,7 +169,7 @@ class TestHomePage extends StatefulWidget {
 
   final String title;
 
-  TestHomePage({Key key, this.title}) : super(key: key);
+  TestHomePage({Key? key, this.title = ""}) : super(key: key);
 
   @override
   State createState() {
@@ -277,31 +277,31 @@ class _TestHomePageState extends State<TestHomePage> {
                     )
                   ],)
               ),
-              RaisedButton(onPressed: loginDisabled ? null : this._loginPressed, child: Text("Log In (Resolution Page)"),),
-              RaisedButton(child: Text("Controls"), onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => ControlsRoute()));},),
+              ElevatedButton(onPressed: loginDisabled ? null : this._loginPressed, child: Text("Log In (Resolution Page)"),),
+              ElevatedButton(child: Text("Controls"), onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => ControlsRoute()));},),
               StarRating(value: stars, onPressed: (value) {
                 setState(() {
                   stars = value;
 
                   //The Closure feature allows us to access to the context even when the building process has already finished, in the anonymous function
-                  homeSize = context.size;
+                  homeSize = context.size!;
                   status = "context captured by closure";
                 });
               },),
-              RaisedButton(child: Text("Orientation Managers"), onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => OrientationRoute()));}),
+              ElevatedButton(child: Text("Orientation Managers"), onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => OrientationRoute()));}),
               Text(Utils.getInfo(context) + "\n" + Utils.getFormattedSize(homeSize) + "\n" + status),
-              RaisedButton(child: Text("Forms"), onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => FormsRoute()));}),
-              RaisedButton(child: Text("Navigation"), onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => NavigationRoute()));}),
-              RaisedButton(child: Text("Key Test"), onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => KeyTestPage()));}),
-              RaisedButton(child: Text("Personal Budget Page"), onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => PersonalBudgetHomePage()));}),
-              RaisedButton(child: Text("Test Login Page (Positioning)"), onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => LoginPage()));}),
-              RaisedButton(child: Text("Error Page"), onPressed: () {Navigator.pushNamed(context, "non_existing_route");}),
-              RaisedButton(child: Text("To-Do List"), onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => ToDoList()));}),
-              RaisedButton(child: Text("File Storage"), onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => FileStorageScreen()));}),
-              RaisedButton(child: Text("Table Layout"), onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => TablePage()));}),
-              RaisedButton(child: Text("Legacy Home"), onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => LegacyHome()));}),
-              RaisedButton(child: Text("Stack Layout"), onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => StackPage()));}),
-              RaisedButton(child: Text("Providers"), onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => ProviderTest()));}),
+              ElevatedButton(child: Text("Forms"), onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => FormsRoute()));}),
+              ElevatedButton(child: Text("Navigation"), onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => NavigationRoute()));}),
+              ElevatedButton(child: Text("Key Test"), onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => KeyTestPage()));}),
+              ElevatedButton(child: Text("Personal Budget Page"), onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => PersonalBudgetHomePage()));}),
+              ElevatedButton(child: Text("Test Login Page (Positioning)"), onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => LoginPage()));}),
+              ElevatedButton(child: Text("Error Page"), onPressed: () {Navigator.pushNamed(context, "non_existing_route");}),
+              ElevatedButton(child: Text("To-Do List"), onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => ToDoList()));}),
+              ElevatedButton(child: Text("File Storage"), onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => FileStorageScreen()));}),
+              ElevatedButton(child: Text("Table Layout"), onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => TablePage()));}),
+              ElevatedButton(child: Text("Legacy Home"), onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => LegacyHome()));}),
+              ElevatedButton(child: Text("Stack Layout"), onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => StackPage()));}),
+              ElevatedButton(child: Text("Providers"), onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => ProviderTest()));}),
             ],
             ),
           ),
@@ -373,7 +373,7 @@ class KeyTestPage extends StatefulWidget {
 
 class _KeyTestPageState extends State<KeyTestPage> {
 
-  List<Widget> tiles;
+  late List<Widget> tiles;
 
   void swapTiles() {
     setState(() {
@@ -417,6 +417,7 @@ class _KeyTestPageState extends State<KeyTestPage> {
 
 
 class User {
-  String name;
-  String password;
+  String? name;
+  String? password;
+
 }

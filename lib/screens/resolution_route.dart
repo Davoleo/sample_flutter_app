@@ -13,11 +13,11 @@ class ResolutionRoute extends StatefulWidget {
 
 class _ResolutionDemo extends State<ResolutionRoute> {
 
-  int width;
-  int height;
-  double pixelRatio;
-  String aspectRatio;
-  Orientation orientation;
+  late int width;
+  late int height;
+  late double pixelRatio;
+  late String aspectRatio;
+  late Orientation orientation;
 
   @override
   Widget build(BuildContext context) {

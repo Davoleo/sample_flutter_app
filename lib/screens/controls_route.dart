@@ -19,7 +19,7 @@ enum Options {
 }
 
 class _ControlsDemo extends State<ControlsRoute> {
-  bool cbState = false;
+  bool? cbState = false;
   bool switchState = false;
   int sliderValue = 0;
 
@@ -35,9 +35,9 @@ class _ControlsDemo extends State<ControlsRoute> {
     LanguageColor(6, "C++", Color(0xFFFF5E9C)),
   ];
 
-  LanguageColor dropValue;
+  LanguageColor? dropValue;
 
-  EnumPage popupValue;
+  EnumPage? popupValue;
 
   void onRadioClick(newValue) {
     setState(() {
@@ -113,11 +113,12 @@ class _ControlsDemo extends State<ControlsRoute> {
               label: "Drag Me! Slider Value is $sliderValue",
             ),
             Text("Il Valore è $sliderValue"),
-            RaisedButton(
-              elevation: 6,
-              highlightElevation: 1,
-              textColor: Colors.orange,
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(16))),
+            ElevatedButton(
+              style: ButtonStyle(
+                elevation: MaterialStateProperty.resolveWith((states) => states.contains(MaterialState.pressed) ? 1 : 6),
+                textStyle: MaterialStatePropertyAll(TextStyle(color: Colors.orange)),
+                shape: MaterialStatePropertyAll(RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(16)))),
+              ),
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
@@ -128,20 +129,32 @@ class _ControlsDemo extends State<ControlsRoute> {
               onPressed: () => {},
             ),
             //Specific Icon RaisedButton Constructor
-            RaisedButton.icon(onPressed: () => {}, icon: Icon(Icons.arrow_downward), label: Text("icon constructor")),
-            FlatButton(
+            ElevatedButton.icon(onPressed: () => {}, icon: Icon(Icons.arrow_downward), label: Text("icon constructor")),
+            TextButton(
               onPressed: () => {},
 
-              child: Text("Flat Button", style: TextStyle(fontSize: 20),),
-              color: Colors.red,
-              textColor: Colors.white,
-              disabledColor: Colors.grey,
-              disabledTextColor: Colors.black,
-              splashColor: Colors.deepOrangeAccent,
-              //Teme Presets, shortcut to set all the materials properties
-              //textTheme: ButtonTextTheme.primary,
+              child: Text("Elevated Button", style: TextStyle(fontSize: 20),),
+              style: ButtonStyle(
+                backgroundColor: MaterialStateColor.resolveWith(
+                    (Set<MaterialState> states) {
+                      if (states.contains(MaterialState.disabled))
+                        return Colors.grey;
+                      else
+                        return Colors.red;
+                    }
+                ),
+                textStyle: MaterialStateProperty.resolveWith(
+                    (Set<MaterialState> states) =>
+                      TextStyle(
+                          color: states.contains(MaterialState.disabled) ? Colors.black : Colors.white
+                      )
+                ),
+                overlayColor: MaterialStateColor.resolveWith((states) => Colors.deepOrangeAccent),
+                padding: MaterialStatePropertyAll(EdgeInsets.all(8)),
+              ),
 
-              padding: EdgeInsets.all(8),
+              //Theme Presets, shortcut to set all the materials properties
+              //textTheme: ButtonTextTheme.primary,
             ),
               IconButton(icon: Icon(Icons.videocam), onPressed: () => {},),
               DropdownButton<LanguageColor>(
@@ -161,7 +174,7 @@ class _ControlsDemo extends State<ControlsRoute> {
                       );
                     }
                 ).toList(),
-                onChanged: (LanguageColor value) {setState(() {
+                onChanged: (LanguageColor? value) {setState(() {
                   dropValue = value;
                 });},
               ),

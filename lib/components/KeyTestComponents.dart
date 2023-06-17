@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 class StatelessColorWidget extends StatelessWidget {
 
-  StatelessColorWidget(this.color, {Key key}) : super(key: key);
+  StatelessColorWidget(this.color, {required Key key}) : super(key: key);
 
   final Color color;
 
@@ -21,7 +21,7 @@ class StatelessColorWidget extends StatelessWidget {
 
 class StatefulColorWidget extends StatefulWidget {
 
-  StatefulColorWidget(this.color, {Key key}) : super(key: key);
+  StatefulColorWidget(this.color, {required Key key}) : super(key: key);
 
   final Color color;
 

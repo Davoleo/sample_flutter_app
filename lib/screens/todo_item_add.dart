@@ -7,7 +7,7 @@ class AddToDoItem extends StatefulWidget {
 }
 
 class _AddToDoItemState extends State<AddToDoItem> {
-  final ToDoItem item = ToDoItem(description: "", title: "");
+  final ToDoItem item = ToDoItem();
 
   @override
   Widget build(BuildContext context) {
@@ -39,10 +39,10 @@ class _AddToDoItemState extends State<AddToDoItem> {
               ),
 
               Checkbox(
-                  value: item.done != 0,
+                  value: item.done,
                   onChanged: (value) {
                     setState(() {
-                      item.done = item.done != 0 ? 0 : 1;
+                      item.done = !item.done;
                     });
                   }
               )

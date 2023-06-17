@@ -9,15 +9,14 @@ class DBProvider {
   DBProvider._();
   static final DBProvider instance = DBProvider._();
 
-  static Database _database;
+  static Database? _database;
 
   Future<Database> get database async {
-    if (_database != null)
-      return _database;
+    if (_database == null)
+      _database = await _initDatabase();
+      //if database is null, we initialize a new one
 
-    //if database is null, we initialize a new one
-    _database = await _initDatabase();
-    return _database;
+    return _database!;
   }
 
   Future<Database> _initDatabase() async {
@@ -31,10 +30,7 @@ class DBProvider {
   }
 
   Future<void> close() async {
-    if (_database != null)
-      return _database.close();
-    else
-      return null;
+    return _database?.close();
   }
 
 }

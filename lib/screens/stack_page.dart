@@ -38,11 +38,13 @@ class StackPage extends StatelessWidget {
                 alignment: Alignment.bottomRight,
                 child: Padding(
                   padding: const EdgeInsets.only(right: 24, bottom: 24),
-                  child: RaisedButton(
-                    color: Theme.of(context).primaryColor,
+                  child: ElevatedButton(
+                    style: ButtonStyle(
+                      backgroundColor: MaterialStatePropertyAll(Theme.of(context).primaryColor),
+                    ),
                     child: Text(
                       "Reserve",
-                      style: TextStyle(color: Theme.of(context).bottomAppBarColor),
+                      style: TextStyle(color: BottomAppBarTheme.of(context).color),
                     ),
                     onPressed: () => {},
                   ),

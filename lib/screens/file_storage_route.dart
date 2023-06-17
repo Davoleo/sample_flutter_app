@@ -12,7 +12,7 @@ class _FileStorageScreenState extends State<FileStorageScreen> {
   TextEditingController textBoxController2 = TextEditingController();
 
   void _showMessage(BuildContext context, String message) {
-    final scaffold = Scaffold.of(context);
+    final scaffold = ScaffoldMessenger.of(context);
     scaffold.showSnackBar(SnackBar(content: Text(message)));
   }
 
@@ -37,7 +37,7 @@ class _FileStorageScreenState extends State<FileStorageScreen> {
                 maxLines: 3,
                 controller: textBoxController1,
               ),
-              FlatButton(
+              TextButton(
                 child: Text("Write!"),
                 onPressed: () {
                   FileUtils.save(textBoxController1.text).then((result) {
@@ -56,7 +56,7 @@ class _FileStorageScreenState extends State<FileStorageScreen> {
                 controller: textBoxController2,
                 readOnly: true,
               ),
-              FlatButton(
+              TextButton(
                   onPressed: () {
                     FileUtils.load().then((data) {
                       textBoxController2.text = data;

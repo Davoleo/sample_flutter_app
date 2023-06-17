@@ -5,7 +5,7 @@ class StarRating extends StatelessWidget {
   final void Function(int value) onPressed;
 
 
-  StarRating({@required this.value, @required this.onPressed, Key key}) : super(key: key);
+  StarRating({required this.value, required this.onPressed, Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

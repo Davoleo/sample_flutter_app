@@ -48,6 +48,8 @@ class _FormsRouteState extends State<FormsRoute> {
                   //when the user submits editable content (with the button on the keyboard)
                   onEditingComplete: null,
                   validator: (value) {
+                    if (value == null)
+                      return "This field can't be null!";
                     if(value.isEmpty)
                       return "This field is necessary!";
                     else if (value.length < 3)
@@ -60,6 +62,8 @@ class _FormsRouteState extends State<FormsRoute> {
                   decoration: InputDecoration(labelText: "Surname"),
                   onSaved: (value) => user.name = value,
                   validator: (value) {
+                    if (value == null)
+                      return "This field can't be null!";
                     if(value.isEmpty)
                       return "This field is necessary!";
                     else if (value.length < 3)
@@ -76,10 +80,11 @@ class _FormsRouteState extends State<FormsRoute> {
                       value: user.zone,
                       onChanged: (value) {
                         setState(() {
-                          user.zone = value;
+                          user.zone = value!;
                         });
                       },
-                      onSaved: (value) => user.zone = value,
+                      validator: (value) => value != null ?  "Zone can't be null" : null,
+                      onSaved: (value) => user.zone = value!,
                       items: [
                         DropdownMenuItem(child: Text("North"), value: EnumZone.NORTH,),
                         DropdownMenuItem(child: Text("Centre"), value: EnumZone.CENTRE,),
@@ -94,13 +99,15 @@ class _FormsRouteState extends State<FormsRoute> {
                     child: Text("Birth Date"),
                   ),
                   Spacer(),
-                  Text(user.birthDate == null ? "--/--/----" : widget._dateFormat.format(user.birthDate)),
+                  Text(user.birthDate == null ? "--/--/----" : widget._dateFormat.format(user.birthDate!)),
                   IconButton(icon: Icon(Icons.date_range), onPressed: () => getData(context))
                 ],),
                 TextFormField(
                   decoration: InputDecoration(labelText: "Email"),
                   onSaved: (value) => user.email = value,
                   validator: (value) {
+                    if (value == null)
+                      return "This field can't be null!";
                     if (value.isEmpty)
                       return "This field is necessary!";
                     else if (!RegExp(r"^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(value))
@@ -114,6 +121,8 @@ class _FormsRouteState extends State<FormsRoute> {
                   decoration: InputDecoration(labelText: "Password"),
                   onSaved: (value) => user.password = value,
                   validator: (value) {
+                    if (value == null)
+                      return "This field can't be null!";
                     if (value.isEmpty)
                       return "This field is necessary";
                     else if (value.length < 5)
@@ -126,7 +135,9 @@ class _FormsRouteState extends State<FormsRoute> {
                   decoration: InputDecoration(labelText: "Confirm Password"),
                   onSaved: (value) => user.rePassword = value,
                   validator: (value) {
-                    if (value != _passwordKey.currentState.value)
+                    if (_passwordKey.currentState == null)
+                      return "Other password field is null :huh:";
+                    if (value != _passwordKey.currentState!.value)
                       return "Password fields do not match";
                     return null;
                   },
@@ -136,20 +147,22 @@ class _FormsRouteState extends State<FormsRoute> {
                   Spacer(),
                   Checkbox(
                     value: user.newsLetter,
+                    tristate: false,
                     onChanged: (value) {
                       setState(() {
-                        user.newsLetter = value;
+                        user.newsLetter = value!;
                       });
                     },
                   ),
                 ],),
                 //REGISTER BUTTON
-                RaisedButton(
+                ElevatedButton(
                   child: Text("Sign up"),
                   onPressed: () {
-                    if (_formKey.currentState.validate()) {
+                    var currentState = _formKey.currentState;
+                    if (currentState != null && currentState.validate()) {
                       print("No Errors");
-                      _formKey.currentState.save();
+                      currentState.save();
                     }
                   },
                 )
@@ -168,15 +181,15 @@ enum EnumZone {
 }
 
 class User {
-  String name;
-  String surname;
+  String? name;
+  String? surname;
   EnumZone zone = EnumZone.CENTRE;
-  String email;
-  String password;
-  DateTime birthDate;
+  String? email;
+  String? password;
+  DateTime? birthDate;
   bool newsLetter = false;
 }
 
 class UserRegistration extends User {
-  String rePassword;
+  String? rePassword;
 }

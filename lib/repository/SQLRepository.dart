@@ -7,9 +7,7 @@ class SQLRepository extends DataRepository {
 
   DBProvider _dbProvider;
 
-  SQLRepository() {
-    this._dbProvider = DBProvider.instance;
-  }
+  SQLRepository() : _dbProvider = DBProvider.instance;
 
   @override
   Future<int> add(ToDoItem item) async {
@@ -28,14 +26,13 @@ class SQLRepository extends DataRepository {
 
   @override
   Future<void> closeRepo() {
-    _dbProvider.close();
-    return null;
+    return _dbProvider.close();
   }
 
   @override
-  Future<ToDoItem> get(int id) async {
+  Future<ToDoItem?> get(int id) async {
     Database database = await _dbProvider.database;
-    List<Map> maps = await database.query("TodoList", where: "$id = ?", whereArgs: [id]);
+    var maps = await database.query("TodoList", where: "$id = ?", whereArgs: [id]);
 
     if (maps.isNotEmpty)
       return ToDoItem.fromJson(maps.first);

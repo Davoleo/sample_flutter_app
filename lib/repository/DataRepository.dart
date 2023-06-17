@@ -5,7 +5,7 @@ abstract class DataRepository {
 
   Future<List<ToDoItem>> getAll();
 
-  Future<ToDoItem> get(int id);
+  Future<ToDoItem?> get(int id);
 
   Future<bool> remove(int id);
 

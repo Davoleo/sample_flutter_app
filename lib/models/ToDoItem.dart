@@ -4,26 +4,26 @@ class ToDoItem {
   int id;
   String title;
   String description;
-  int done;
+  bool done;
 
-  ToDoItem({this.id, this.title, this.description, this.done});
+  ToDoItem({this.id = -1, this.title = "", this.description = "", this.done = false});
 
   // To parse this JSON data, do
-//
-//     final todoItem = todoItemFromJson(jsonString);
+  //
+  //     final todoItem = todoItemFromJson(jsonString);
 
   factory ToDoItem.fromJson(Map<String, dynamic> json) => ToDoItem(
-  id: json["id"],
-  title: json["title"],
-  description: json["description"],
-  done: json["done"],
+    id: json["id"],
+    title: json["title"],
+    description: json["description"],
+    done: json["done"],
   );
 
   Map<String, dynamic> toJson() => {
-  "id": id,
-  "title": title,
-  "description": description,
-  "done": done,
+    "id": id,
+    "title": title,
+    "description": description,
+    "done": done,
   };
 
 }

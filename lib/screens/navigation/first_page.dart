@@ -8,12 +8,12 @@ class NavigationFirstPage extends StatefulWidget {
 class _NavigationFirstPageState extends State<NavigationFirstPage> {
   @override
   Widget build(BuildContext context) {
-    String params = ModalRoute.of(context).settings.arguments;
+    var params = ModalRoute.of(context)?.settings.arguments;
 
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          title: Text(params),
+          title: Text(params.toString()),
           leading: IconButton(
             icon: Icon(Icons.arrow_back),
             onPressed: () => Navigator.pop(context),

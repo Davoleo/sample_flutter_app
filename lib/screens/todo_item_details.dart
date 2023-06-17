@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:sample_flutter_app/models/ToDoItem.dart';
 
 class ToDoDetails extends StatelessWidget {
-  const ToDoDetails({Key key}) : super(key: key);
+  const ToDoDetails({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final ToDoItem item = ModalRoute.of(context).settings.arguments;
+    final ToDoItem item = ModalRoute.of(context)!.settings.arguments as ToDoItem;
 
     return SafeArea(
       child: Scaffold(
