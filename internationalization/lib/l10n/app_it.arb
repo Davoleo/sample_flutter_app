@@ -1,0 +1,4 @@
+{
+  "helloWorld": "Ciao Mondo!",
+  "numberOfDataPoints": "Numero di punti dato: {value}"
+}

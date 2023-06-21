@@ -1,0 +1,17 @@
+{
+  "helloWorld": "Hello World!",
+  "@helloWorld": {
+    "description": "The conventional newborn programmer greeting"
+  },
+  "numberOfDataPoints": "Number of data points: {value}",
+  "@numberOfDataPoints": {
+    "description": "A message with a formatted int parameter",
+    "placeholders": {
+      "value": "int",
+      "format": "compactCurrency",
+      "optionalParameters": {
+        "decimalDigits": 2
+      }
+    }
+  }
+}
