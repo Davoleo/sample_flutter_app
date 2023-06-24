@@ -111,6 +111,18 @@ main(List<String> args) {
 
   //The superclass of everything is "Object" (Just like Java)
 
+  //  REGEX SUPPORT
+  final numbers = RegExp(r'\d+');
+  var llamas = 'llamas live 15 to 20 years';
+  assert(llamas.contains(numbers));
+  assert(numbers.hasMatch(llamas)); //<- the other way around
+
+  var exedOut = llamas.replaceAll(numbers, 'XX');
+  assert(exedOut == 'llamas live XX to XX years');
+
+  //iterate through all matches
+  numbers.allMatches(llamas).forEach((match) => print(match.group(0)));
+
 }
 
 
