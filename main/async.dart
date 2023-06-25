@@ -1,3 +1,5 @@
+import 'dart:convert';
+import 'dart:io';
 import 'dart:math';
 
 final random = Random();
@@ -26,6 +28,14 @@ Future<void> printOrderMessage() async {
 void main() {
   countSeconds(4);
   printOrderMessage();
+
+  //File stream example
+  var config = File('README.md');
+  Stream<List<int>> stream = config.openRead();
+  stream.transform(utf8.decoder).transform(const LineSplitter()).listen((String line) {
+    print('Got ${line.length} characters from stream');
+  }, onDone: () => print('file complete, now closed...'), onError: (e) => print(e)
+  );
 }
 
 //Counts seconds by creating s futures with incrementing delay
